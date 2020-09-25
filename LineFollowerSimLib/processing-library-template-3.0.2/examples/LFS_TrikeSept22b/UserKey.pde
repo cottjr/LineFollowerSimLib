@@ -48,12 +48,12 @@ public void keyPressed()  // handle keypress events for manual driving of robot.
   if (key == 'P') panelDisplayMode = (panelDisplayMode + 1) % 3;  // cycle display status command panel opacity
    
   
-  if (keyCode ==  UP)  lfs.changeSpeed(1.0f);
+  if (keyCode ==  UP)  lfs.changeTargetSpeed(1.0f);
   if (key ==  'S' )    { lfs.stop(); lfs.setEnableController(false); }
-  if (keyCode == DOWN) lfs.changeSpeed(-1.0f);
+  if (keyCode == DOWN) lfs.changeTargetSpeed(-1.0f);
     
-    if (keyCode == LEFT)  lfs.changeTurnRate(-11.25f);
-    if (keyCode == RIGHT) lfs.changeTurnRate(11.25f);
+    if (keyCode == LEFT)  lfs.changeTargetTurnRate(-11.25f);
+    if (keyCode == RIGHT) lfs.changeTargetTurnRate(11.25f);
   
    if (keyCode == TAB) courseTop = !courseTop;
    

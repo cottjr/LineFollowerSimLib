@@ -180,9 +180,10 @@ public void setup()
    if (lfs.controllerIsEnabled())    // if turned off, no update.
      userControllerUpdate();         // user reads sensors changes target speed and turn rate as needed.
     
-                                             
    lfs.driveUpdate(simRequestStep);  // if step requested update robot position with current speed and turn rate
-  
+                                     // also stopwatch tick is counted. Note: if controller is not enabled 
+                                     // this call will insure robot position is updated allowing manual drive.   
+                                             
    simRequestStep = false;           // ramping speed and/or turn rate toward targetSpeed and targetTurnRate
                                      // using defined acceleration/deceleration rates.
        

@@ -25,6 +25,10 @@ void userInit()  // called by lfs to obtain robot information and for sensor def
   lfs.setCourse("DPRG_Challenge_2011_64DPI.jpg");   // challenge course     
   lfs.setPositionAndHeading (71.7,120,0);           // initial position over DPRG logo
  
+  lfs.setTimeStep(0.05);  //  changed from default 0.01667 - appears to work OK, triples execution speed of simulation
+                          //  (but not "speed" of robot)
+                          //  As of Sept 22,2020 Trike should make it to first chopped sine wave on DPRG Challenge Course
+                          //  This line can be commented out to resume original default time step of 0.01667 
   
   // below acceleration and deceleration rates are subject to LFS maximums
   

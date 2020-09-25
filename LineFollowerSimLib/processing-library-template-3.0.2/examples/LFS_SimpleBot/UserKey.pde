@@ -48,12 +48,22 @@ public void keyPressed()  // handle keypress events for manual driving of robot.
   if (key == 'P') panelDisplayMode = (panelDisplayMode + 1) % 3;  // cycle display status command panel opacity
    
   
-  if (keyCode ==  UP)  lfs.changeSpeed(1.0f);
+  if (keyCode ==  UP)  lfs.changeTargetSpeed(1.0f);
   if (key ==  'S' )    { lfs.stop(); lfs.setEnableController(false); }
-  if (keyCode == DOWN) lfs.changeSpeed(-1.0f);
+  if (keyCode == DOWN) lfs.changeTargetSpeed(-1.0f);
     
-    if (keyCode == LEFT)  lfs.changeTurnRate(-11.25f);
-    if (keyCode == RIGHT) lfs.changeTurnRate(11.25f);
+  if (keyCode == LEFT)  lfs.changeTargetTurnRate(-11.25f);
+  if (keyCode == RIGHT) lfs.changeTargetTurnRate(11.25f);
+  
+  
+  // Sideways Drive Mode - e.g. Mecanum Wheel  using < > keys (shifted or not shifted) 
+  // controller would typically use lfs.setTargetSidewaysSpeed() method in addition to 
+  // setTargetSpeed() forward/back motion and setTargetTurnRate for heading change
+  
+  if ((keyCode==',') || (keyCode == '<')) lfs.changeTargetSidewaysSpeed(-1.0);
+  if ((keyCode=='.') || (keyCode == '>')) lfs.changeTargetSidewaysSpeed(1.0);
+  
+  
   
    if (keyCode == TAB) courseTop = !courseTop;
    

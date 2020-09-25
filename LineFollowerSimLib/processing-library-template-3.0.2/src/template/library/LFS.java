@@ -436,8 +436,18 @@ public float getMaxTurnRate() { return userMaxTurnRate; }
  * 
  * @param delta is change (inches/sec)
  */
+public void changeTargetSpeed(float delta) { robot.changeTargetSpeed(delta,maxSpeed); }
 
-public void changeSpeed(float delta) { robot.changeSpeed(delta); }
+
+/** Change target sideways speed with no reported error checking, speed is restricted to maxSpeed.
+ * Generally setTargetSidewaysSpeed() method is thought to be more useful for user robot controller. 
+ * 
+ * @param delta is change (inches/sec)
+ */
+public void changeTargetSidewaysSpeed(float delta) { robot.changeTargetSidewaysSpeed(delta,maxSpeed); }
+
+
+
 
 /** Change turn rate (deg/sec) with no reported error checking, turn rate is restricted to
  * maxTurnRate. Generally setTargetTurnRate() method is thought to be more useful for user robot controller.
@@ -445,7 +455,7 @@ public void changeSpeed(float delta) { robot.changeSpeed(delta); }
  * @param delta is change in (degrees/sec)
  */
 
-public void changeTurnRate(float delta) { robot.changeTurnRate(delta); }
+public void changeTargetTurnRate(float delta) { robot.changeTargetTurnRate(delta,maxTurnRate); }
 
 /** Robot is slowed to stop using pre-set decelRate for speed and turnAcc rate for 
  * turn rate.
@@ -500,8 +510,12 @@ public void setCourse(String fname)
 public void drawRobotLocHeadingVel(float x, float y)  
 {
 // does report "actual" robot x,y and heading, draws onto screen
-// idea is user not supposed to know actual location 
+// idea is user not supposed to know actual location hence draw and not make vars available
 
+if (robot.sidewaysSpeed != 0)	
+	p.text (String.format ("loc(%3.0f,%3.0f) %03.0f deg  vel %1.1f:%1.1f ips",
+            robot.x,robot.y,robot.heading,robot.speed,robot.sidewaysSpeed),x,y);
+else
 p.text (String.format ("loc(%3.0f,%3.0f) %03.0f deg  vel %1.1f ips",
             robot.x,robot.y,robot.heading,robot.speed),x,y);
 }
@@ -520,8 +534,8 @@ contestResetCount=0;
  */
 public void driveUpdate(boolean stepRequested)
 {
-  if (stepRequested)
-  { 
+  if ((stepRequested) || !controllerEnabled)      // needed to insure when controller OFF drive update still works
+  {                                               // for manual test driving robot
     robot.driveUpdate(timeStep);
     view.crumbAdd(robot);
   }  
@@ -606,8 +620,22 @@ if (Math.abs(s)>maxSpeed)
 robot.setTargetSpeed(s);
 }
 
-/** Set target drive speed where the simulation will ramp up or ramp down using defined acceleration rate
- *  or deceleration rate to attain the target speed over succeeding simulation steps. 
+/** Set target sideways drive speed (inches/sec) where the simulation will ramp up or ramp down
+ * using defined acceleration rate or deceleration rate to attain the target sideways speed over 
+ * succeeding simulation steps. 
+ * 
+ * @param tss Target speed (inches/sec)
+ */
+
+public void setTargetSidewaysSpeed(float tss)
+{
+  robot.setTargetSidewaysSpeed(tss); 
+}
+
+
+/** Set target turn rate where the simulation will ramp up or ramp down using defined turn 
+ *  acceleration / deceleration rate to attain the target turn rate over succeeding
+ *  simulation steps. 
  * 
  * @param r Target turn rate (degrees/sec)
  *  
@@ -633,6 +661,16 @@ robot.setTargetTurnRate(r);
  * @return speed (inches/sec)
  */
 public float getSpeed()    { return robot.getSpeed();    }  
+
+
+/** Current robot sideways speed, when less than targetSidewaysSpeed robot is accelerating
+ *  when greater than target sideways speed, robot is decelerating.
+ *  
+ * @return sideways speed (inches/sec)
+ */
+public float getSidewaysSpeed()    { return robot.getSidewaysSpeed();    }  
+
+
 
 /** Current robot turn rate, when less than targetTurnRate robot is accelerating its turn rate when greater than 
  * target turn rate, robot is decelerating its turn rate. 
@@ -737,6 +775,8 @@ public boolean contestIsRunning()
 {
   return contestState == ContestStates.csRun;
 }
+
+
 
 /**
  * Stop contest - robot slowed to stop, controller disabled, stop watch stopped. At this point

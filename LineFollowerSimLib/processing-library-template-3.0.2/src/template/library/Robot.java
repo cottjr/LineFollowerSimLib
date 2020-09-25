@@ -77,24 +77,26 @@ float targetSidewaysSpeed;
 
 
 
-public Robot (PApplet p, float x, float y, float heading)
+Robot (PApplet p, float x, float y, float heading)
 {
-parent = p;
-
-this.xi = x;
-this.yi = y;
-this.headingi = heading;
-init();
-reset();
+	parent = p;
+	
+	this.xi = x;
+	this.yi = y;
+	this.headingi = heading;
+	
+		
+	init();
+	reset();
 
 } 
 
 void init()
 {
-acclRate = 0.0f;             // by default, instantly apply speed vs ramp    -- assume both set to non-zero if changed
-declRate = 0.0f;             // use setAccDecelRates() method to set.
-turnAcc = 0.0f;              // turn acceleration in deg/sec^2   
-hardStop();
+	acclRate = 0.0f;      // by default, instantly apply speed vs ramp    -- assume both set to non-zero if changed
+	declRate = 0.0f;      // use setAccDecelRates() method to set.
+	turnAcc = 0.0f;       // turn acceleration in deg/sec^2   
+	hardStop();
 
 }
 
@@ -103,12 +105,12 @@ hardStop();
  */
 void hardStop()  // instant stop 
 {
-targetSpeed = 0;
-speed = 0;
-targetSidewaysSpeed = 0;
-sidewaysSpeed = 0;       // Mecanum wheel
-targetTurnRate = 0;
-turnRate = 0;
+	targetSpeed = 0;
+	speed = 0;
+	targetSidewaysSpeed = 0;
+	sidewaysSpeed = 0;       // Mecanum wheel
+	targetTurnRate = 0;
+	turnRate = 0;
 }
 
 void setAccDcelRates(float acc, float decel )  // set acceleration deceleration rates in inches/sec^2
@@ -125,39 +127,38 @@ void setTurnAcc(float acc)
 void setTargetSpeed(float s)
 {
 targetSpeed = s;
-//if (acclRate == 0.0) speed = s;  // default case acc//decel == 0   speed is set instantly
 } 
 
-void setSidewaysSpeed(float hs)
+void setTargetSidewaysSpeed(float hs)
 {
-targetSidewaysSpeed = hs; 
+  targetSidewaysSpeed = hs; 
 }
-
-
-void changeSidewaysSpeed (float delta)
-{
-sidewaysSpeed += delta;
-targetSidewaysSpeed = sidewaysSpeed;
-}
-
 
 
 void setTargetTurnRate(float tr)
 {
-targetTurnRate = tr;                   
+  targetTurnRate = tr;                   
 }
 
 float getTurnRate () { return turnRate; }
 float getSpeed()     { return speed; }
+float getSidewaysSpeed() { return sidewaysSpeed; }
 
 
-public void changeSpeed(float delta)
+void changeTargetSpeed(float delta, float maxSpeed)
 { targetSpeed += delta;
   if (targetSpeed > maxSpeed) targetSpeed = maxSpeed;
   if (targetSpeed <-maxSpeed) targetSpeed = -maxSpeed;
 }
 
-public void changeTurnRate (float delta)
+
+void changeTargetSidewaysSpeed(float delta, float maxSpeed)
+{ targetSidewaysSpeed += delta;
+  if (targetSidewaysSpeed > maxSpeed) targetSidewaysSpeed = maxSpeed;
+  if (targetSidewaysSpeed <-maxSpeed) targetSidewaysSpeed = -maxSpeed;
+}
+
+void changeTargetTurnRate (float delta,float maxTurnRate)
 {
   targetTurnRate += delta;
   if (targetTurnRate > maxTurnRate) targetTurnRate = maxTurnRate;
@@ -165,10 +166,11 @@ public void changeTurnRate (float delta)
 }
 
 
-public void slowToStop()
+void slowToStop()
 {
   targetSpeed = 0;
   targetTurnRate = 0;
+  targetSidewaysSpeed = 0;   // e.g. Mecanum wheels
 }
 
 
@@ -243,7 +245,7 @@ if (sidewaysSpeed != targetSidewaysSpeed)     // accelerate / decelerate if non-
   
  if (sidewaysSpeed < targetSidewaysSpeed) {
     sidewaysSpeed += acclRate * dt;
-    if (sidewaysSpeed> targetSidewaysSpeed) sidewaysSpeed = targetSidewaysSpeed;
+ if (sidewaysSpeed> targetSidewaysSpeed) sidewaysSpeed = targetSidewaysSpeed;
  }
  
  if (sidewaysSpeed > targetSidewaysSpeed) {
@@ -302,4 +304,4 @@ if (heading<0.0) heading += 360;           // -5 would become 355
 
 }
 
-}
+} // end class
