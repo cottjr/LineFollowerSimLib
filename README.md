@@ -4,11 +4,13 @@ LFS is a software tool designed assist in the process of desinging robot line fo
 LFS let's you quickly prototype different controller ideas, with different robot configurations, and develop insight to how they might behave on different line following courses. By the time LFS was first published on GitHub in August 2020, it had already been used to experiment and improve on sensor placement and controller algorithms for the baseline Tricycle Controller included in this repo. 
 <p>
 LFS utilizes the Processing environment which is availble for download at www.processing.org. LFS is built into a procesing library which includes core code and example Processing sketches included here. 
-  
+<p>)  
 This software was developed in context of the Dallas Personal Robotics Group (DPRG). Learn more about DPRG at https://www.dprg.org/. Check out DPRG's extensive You Tube library https://www.youtube.com/user/DPRGclips.
- 
+<p> 
 Check out various DPRG line following courses at https://github.com/dprg/Contests/tree/master/Line%20Following. 
+<p>
 Shown below is an image of the DPRG Challenge Course. Join in an create your controller to solve this course! 
+<p>
 ![](https://github.com/ron-grant/LineFollowerSimLib/blob/master/ChallengeSmallImage.jpg)
 
 
