@@ -9,7 +9,7 @@ This software was developed in context of the Dallas Personal Robotics Group (DP
 <p> 
 Check out various DPRG line following courses at https://github.com/dprg/Contests/tree/master/Line%20Following. 
 <p>
-Shown below is an image of the DPRG Challenge Course. Join in an create your controller to solve this course! 
+Shown below is an image of the DPRG Challenge Course. Join in and create your controller to solve this course! 
 <p>
   
 ![](https://github.com/ron-grant/LineFollowerSimLib/blob/master/ChallengeSmallImage.jpg)
