@@ -29,8 +29,12 @@ Copy LineFollowerSim folder to to Processing sketchbook folders libraries subfol
 To locate your processing sketchbook folder: Use Processing menu command  File>Preferences to display Preferences dilog. The sketchbook path is listed in the dialog as the first item.
 <p>  
 Start/Restart Processing  File>Examples  you will find Two example sketches when expanding tree branch named Line Following Simulator.
-
-
+<p>
+The LFS Application Interface as used by the included example sketches, is documented in the reference subfolder of the LineFollowerSim library folder. Click on index.html and the API documentation will appear in your browser.
+<p> 
+Also, download the User's guide from the file list above.
+<p>
+Happy line following!
 
 
 
