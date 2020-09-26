@@ -5,7 +5,10 @@ LFS let's you quickly prototype different controller ideas, with different robot
 <p>
 LFS utilizes the Processing environment which is availble for download at www.processing.org. LFS is built into a procesing library which includes core code and example Processing sketches included here. 
   
-  
+This software was developed in context of the Dallas Personal Robotics Group (DPRG). Learn more about DPRG at https://www.dprg.org/. Check out DPRG's extensive You Tube library https://www.youtube.com/user/DPRGclips.
+ 
+Check out various DPRG line following courses at https://github.com/dprg/Contests/tree/master/Line%20Following. 
+Shown below is an image of the DPRG Challenge Course. Join in an create your controller to solve this course! 
 ![](https://github.com/ron-grant/LineFollowerSimLib/blob/master/ChallengeSmallImage.jpg)
 
 
