@@ -6,7 +6,7 @@ LFS let's you quickly prototype different controller ideas, with different robot
 LFS utilizes the Processing environment which is availble for download at www.processing.org. LFS is built into a procesing library which includes core code and example Processing sketches included here. 
   
   
-[alt text]()
+![](https://github.com/ron-grant/LineFollowerSimLib/blob/master/ChallengeSmallImage.jpg)
 
 
 
